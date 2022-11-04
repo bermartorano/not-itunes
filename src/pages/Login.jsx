@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Redirect, Switch } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { createUser } from '../services/userAPI';
 import LoadingScreen from './LoadingScreen';
 
@@ -8,6 +8,7 @@ class Login extends Component {
     isloginButtonDisabled: true,
     loginName: '',
     loading: false,
+    willRedirect: false,
   };
 
   loginValidation = () => {
@@ -27,8 +28,10 @@ class Login extends Component {
     const { loginName } = this.state;
     this.setState({ loading: true }, () => {
       createUser({ name: loginName })
-        .then(() => this.setState({ loading: false }))
-        .then(() => <Switch><Redirect exact from="/" to="/search" /></Switch>);
+        .then(() => this.setState({
+          loading: false,
+          willRedirect: true,
+        }));
     });
   };
 
@@ -37,6 +40,7 @@ class Login extends Component {
       isloginButtonDisabled,
       loginName,
       loading,
+      willRedirect,
     } = this.state;
 
     if (loading) {
@@ -45,6 +49,7 @@ class Login extends Component {
 
     return (
       <div data-testid="page-login">
+        { willRedirect && <Redirect to="/search" />}
         <h2>Login</h2>
         <form action="">
           <label htmlFor="name-imput">
