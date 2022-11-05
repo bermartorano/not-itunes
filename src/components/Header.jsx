@@ -27,7 +27,7 @@ class Header extends Component {
         Header
         <p data-testid="header-user-name">{ UserName }</p>
         <div>
-          <Link to="/search" ata-testid="link-to-search">Pesquisa</Link>
+          <Link data-testid="link-to-search" to="/search">Pesquisa</Link>
           <Link data-testid="link-to-favorites" to="/favorites">Favoritas</Link>
           <Link data-testid="link-to-profile" to="/profile">Perfil</Link>
         </div>
