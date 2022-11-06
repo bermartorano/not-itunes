@@ -28,9 +28,9 @@ class Search extends Component {
     const { artistName } = this.state;
     this.setState({ loading: true }, () => {
       searchAlbumsAPI(artistName)
-        .then((resolve) => this.setState({
+        .then((response) => this.setState({
           artistName: '',
-          apiAwnser: resolve,
+          apiAwnser: response,
           loading: false,
         }));
     });
@@ -48,6 +48,7 @@ class Search extends Component {
         <Header />
         <form>
           <label htmlFor="artist-name">
+            Digite o nome do artista
             <input
               type="text"
               name="artistName"

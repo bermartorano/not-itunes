@@ -69,7 +69,7 @@ class Login extends Component {
             data-testid="login-submit-button"
             name="loginButton"
             disabled={ isloginButtonDisabled }
-            onClick={ this.salveNameInput } // trocarrrr
+            onClick={ this.salveNameInput }
           >
             Entrar
           </button>
