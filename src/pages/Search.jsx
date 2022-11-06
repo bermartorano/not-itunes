@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import LoadingScreen from './LoadingScreen';
+import AlbumsList from '../components/AlbumsList';
+import ArtistNameDisplayed from '../components/ArtistNameDisplayed';
 
 class Search extends Component {
   state = {
     artistName: '',
     isSearchButtonDisabled: true,
-    apiAwnser: '',
+    apiAwnser: [],
     loading: false,
+    apiAwnsered: false,
+    lastArtist: '',
   };
 
   searchValidation = () => {
@@ -28,16 +32,25 @@ class Search extends Component {
     const { artistName } = this.state;
     this.setState({ loading: true }, () => {
       searchAlbumsAPI(artistName)
-        .then((response) => this.setState({
+        .then((response) => this.setState((prevState) => ({
           artistName: '',
           apiAwnser: response,
           loading: false,
-        }));
+          apiAwnsered: true,
+          lastArtist: prevState.artistName,
+        })));
     });
   };
 
   render() {
-    const { artistName, isSearchButtonDisabled, loading } = this.state;
+    const {
+      artistName,
+      isSearchButtonDisabled,
+      loading,
+      apiAwnser,
+      apiAwnsered,
+      lastArtist,
+    } = this.state;
 
     if (loading) {
       return (<div><LoadingScreen /></div>);
@@ -69,6 +82,9 @@ class Search extends Component {
             Pesquisar
           </button>
         </form>
+        { apiAwnser.length === 0 && <p>Nenhum álbum foi encontrado</p>}
+        { apiAwnsered && <ArtistNameDisplayed lastArtist={ lastArtist } /> }
+        { apiAwnsered && <AlbumsList apiAwnser={ apiAwnser } />}
       </div>
     );
   }
