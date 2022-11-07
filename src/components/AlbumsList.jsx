@@ -11,7 +11,6 @@ class AlbumsList extends Component {
         <ul>
           {apiAwnser.map(({ collectionId, collectionName }) => {
             const listItem = <li key={ collectionId }>{collectionName}</li>;
-            // const result = <Link data-testid={`link-to-album-${collectionId}`} to={ `/album/${collectionId}` }>{ listItem }</Link>;
             return (
               <Link
                 key={ collectionId }
