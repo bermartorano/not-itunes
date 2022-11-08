@@ -18,7 +18,7 @@ class MusicCard extends Component {
           <input
             id={ `${trackId}` }
             type="checkbox"
-            onClick={ handleClickFavorites }
+            onChange={ handleClickFavorites }
             checked={ favorite }
           />
         </label>
