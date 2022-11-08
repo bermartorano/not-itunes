@@ -14,7 +14,7 @@ class Album extends Component {
     loading: false,
   };
 
-  async componentDidMount() {
+  componentDidMount() {
     this.infoPrep();
   }
 
